@@ -1,6 +1,6 @@
 resource "google_compute_router" "router"{
     name    = var.router_name
-    network = "${google_compute_network.vpc_network.self_link}"
+    network = module.vpc.vpc_network
 }
 
 resource "google_compute_router_nat" "nat" {
