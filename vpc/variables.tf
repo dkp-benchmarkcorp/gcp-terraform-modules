@@ -16,20 +16,23 @@ variable "routing_mode" {
     default     = "GLOBAL"
 }           
 
-variable "subnetworks" {
-    description = "Define subnetwork detail for VPC"
-    type        = list(object({
-        name            = string   # name of the subnetwork
-        region          = string
-        cidr            = string
-
-    }))
-}
-
-variable "secondary" {
-    description = "Define secondary subnetwork detail for VPC"
-    type        = list(object({
-        name            = string   # name of the subnetwork
-        cidr            = string
-   }))
-}
+variable "subnetworks_name" {
+    description = "Sets the network-wide routing mode for Cloud Routers to use. Accepted values are GLOBAL or REGIONAL."
+    type        = "string"
+    default     = "GLOBAL"
+}   
+variable "subnetworks_cidr" {
+    description = "Sets the network-wide routing mode for Cloud Routers to use. Accepted values are GLOBAL or REGIONAL."
+    type        = "string"
+    default     = "GLOBAL"
+}             
+variable "secondary_name" {
+    description = "Sets the network-wide routing mode for Cloud Routers to use. Accepted values are GLOBAL or REGIONAL."
+    type        = "string"
+    default     = "GLOBAL"
+}             
+variable "secondary_cidr" {
+    description = "Sets the network-wide routing mode for Cloud Routers to use. Accepted values are GLOBAL or REGIONAL."
+    type        = "string"
+    default     = "GLOBAL"
+}             
