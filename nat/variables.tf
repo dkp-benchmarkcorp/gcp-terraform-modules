@@ -13,3 +13,8 @@ variable "nat_logging" {
     type        = "string"
     default     = "false"
 }
+
+variable "vpc_network" {
+    description = "vpc_network"
+    type        = "string"
+}
