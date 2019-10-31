@@ -14,7 +14,7 @@ variable "nat_logging" {
     default     = "false"
 }
 
-variable "vpc_network" {
+variable "network_name" {
     description = "vpc_network"
     type        = "string"
 }
