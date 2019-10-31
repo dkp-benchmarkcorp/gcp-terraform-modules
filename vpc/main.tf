@@ -4,7 +4,7 @@ locals {
 }
 ###VPC configuration
 resource "google_compute_network" "vpc_network" {
-    count                  = var.create_network ? 1 : 0
+    count                   = var.create_network ? 1 : 0
     name                    = var.network_name
     auto_create_subnetworks = var.auto_create_subnetworks
     routing_mode            = var.routing_mode
@@ -21,7 +21,6 @@ data "google_compute_network" "network" {
 
 resource "google_compute_shared_vpc_host_project" "shared_vpc_host" {
   count   = var.shared_vpc_host == "true" ? 1 : 0
-  project = var.project_id
 }
 
 ### SUBNETS
