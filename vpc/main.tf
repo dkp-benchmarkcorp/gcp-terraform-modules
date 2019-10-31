@@ -30,11 +30,11 @@ resource "google_compute_subnetwork" "subnetwork" {
      
       name          = var.subnetworks_name
       ip_cidr_range = var.subnetworks_cidr
-      network       = local.network_name.self_link
+      network       = google_compute_network.vpc_network.name
       secondary_ip_range {
           range_name    = var.secondary_name
           ip_cidr_range = var.secondary_cidr
-          depends_on    = [google_compute_network.network]
+          depends_on    = [google_compute_network.vpc_network]
       }
   }
 
