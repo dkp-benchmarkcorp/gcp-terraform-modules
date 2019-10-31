@@ -34,6 +34,6 @@ output "subnets_secondary_ranges" {
 }
 
 output "routes" {
-  value       = google_compute_route.route.*.name
+  value       = google_compute_route.route[count.index].name
   description = "The routes associated with this VPC"
 }
