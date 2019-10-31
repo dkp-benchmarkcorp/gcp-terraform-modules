@@ -54,7 +54,7 @@ variable "description" {
 }
 
 variable "routes" {
-  type        = string
+  type        = list(map(string))
   description = "List of routes being created in this VPC"
-  default     = "0.0.0.0/0"
+  default     = []
 }

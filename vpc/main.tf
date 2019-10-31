@@ -52,7 +52,7 @@ resource "google_compute_route" "route" {
   name                   = lookup(var.routes, "name", format("%s-%s-%d", lower(local.network_name), "route"))
   description            = lookup(var.routes, "description", "")
   tags                   = compact(split(",", lookup(var.routes, "tags", "")))
-  dest_range             = var.routes
+  dest_range             = lookup(var.routes[count.index], "destination_range", "")
   priority               = 1000
 
   depends_on = [
