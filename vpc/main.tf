@@ -49,9 +49,9 @@ resource "google_compute_subnetwork" "subnetwork" {
 resource "google_compute_route" "route" {
   count                  = length(var.routes)
   network                = local.network_name
-  name                   = lookup(var.routes, "name", format("%s-%s-%d", lower(local.network_name), "route"))
-  description            = lookup(var.routes, "description", "")
-  tags                   = compact(split(",", lookup(var.routes, "tags", "")))
+  name                   = lookup(var.routes[count.index], "name", format("%s-%s-%d", lower(local.network_name), "route", count.index))
+  description            = lookup(var.routes[count.index], "description", "")
+  tags                   = compact(split(",", lookup(var.routes[count.index], "tags", "")))
   dest_range             = lookup(var.routes[count.index], "destination_range", "")
   priority               = 1000
 
