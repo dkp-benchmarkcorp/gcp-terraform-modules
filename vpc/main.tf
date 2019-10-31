@@ -1,10 +1,10 @@
 locals {
-  network_self_link = var.create_network ? google_compute_network.vpc_network.self_link : data.google_compute_network.vpc_network.self_link
-  network_name      = var.create_network ? google_compute_network.vpc_network.name : data.google_compute_network.vpc_network.name
+  network_self_link = var.create_network ? google_compute_network.vpc_network[0].self_link : data.google_compute_network.vpc_network[0].self_link
+  network_name      = var.create_network ? google_compute_network.vpc_network[0].name : data.google_compute_network.vpc_network[0].name
 }
 ###VPC configuration
 resource "google_compute_network" "vpc_network" {
- #   count                   = var.create_network ? 1 : 0
+    count                   = var.create_network ? 1 : 0
     name                    = var.network_name
     auto_create_subnetworks = var.auto_create_subnetworks
     routing_mode            = var.routing_mode
