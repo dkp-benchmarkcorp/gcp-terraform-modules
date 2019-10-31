@@ -47,7 +47,7 @@ resource "google_compute_subnetwork" "subnetwork" {
 ###	Routes
  
 resource "google_compute_route" "route" {
- 
+  count                  = length(var.routes)
   network                = local.network_name
   name                   = lookup(var.routes, "name", format("%s-%s-%d", lower(local.network_name), "route"))
   description            = lookup(var.routes, "description", "")
