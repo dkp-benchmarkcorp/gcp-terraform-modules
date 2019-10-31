@@ -14,11 +14,11 @@ variable "auto_create_subnetworks" {
     type        = "string"
     default     = "true"
 }
-variable "shared_vpc_host" {
-  type        = string
-  description = "Makes this project a Shared VPC host if 'true' (default 'false')"
-  default     = "false"
-}
+#variable "shared_vpc_host" {
+#  type        = string
+#  description = "Makes this project a Shared VPC host if 'true' (default 'false')"
+#  default     = "false"
+#}
 
 variable "routing_mode" {
     description = "Sets the network-wide routing mode for Cloud Routers to use. Accepted values are GLOBAL or REGIONAL."
