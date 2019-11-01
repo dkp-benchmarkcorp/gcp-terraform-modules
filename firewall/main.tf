@@ -1,7 +1,7 @@
 resource "google_compute_firewall" "default" {
   count = length(var.firewall)
   name    = lookup(var.firewall[count.index], "name", "")
-  network = module.vpc.network_name
+  network = var.network_name
 
   allow {
     protocol = lookup(var.firewall[count.index], "protocol", "")
