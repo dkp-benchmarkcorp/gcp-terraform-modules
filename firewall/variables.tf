@@ -5,13 +5,13 @@ variable "firewall" {
 }
 
 variable "port" {
-  type        = list
+  type        = string
   description = "List of firewall rules"
   default     = []
 }
 
 variable "source_tag" {
-  type        = list
+  type        = string
   description = "List of firewall rules"
   default     = []
 }
