@@ -1,12 +1,10 @@
 resource "google_compute_firewall" "default" {
-  for_each = var.firewall
-  name    = lookup(each.value, "name", "")
-  network = lookup(each.value, "network", "")
-
-  allow {
-    protocol = lookup(each.value, "protocol", "")
-    ports    = [lookup(each.value, "ports", "")]
-  }
-
-source_tags = [lookup(each.value, "source_tags", "")]
+ count = length(var.firewall)
+ name    = lookup(var.firewall[count.index], "name", "")
+ network = lookup(var.firewall[count.index], "network", "")
+ allow {
+   protocol = lookup(var.firewall[count.index], "protocol", "")
+   ports    = [lookup(var.firewall[count.index], "ports", "")]
+ }
+ source_tags = [lookup(var.firewall[count.index], "source_tags", "")]
 }
