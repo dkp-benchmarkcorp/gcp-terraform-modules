@@ -1,5 +1,5 @@
 variable "firewall" {
-  type        = list(map(string))
+  type        = list(string)
   description = "List of firewall rules"
   default     = []
 }
