@@ -53,6 +53,7 @@ resource "google_compute_route" "route" {
   description            = lookup(var.routes[count.index], "description", "")
   tags                   = compact(split(",", lookup(var.routes[count.index], "tags", "")))
   dest_range             = lookup(var.routes[count.index], "destination_range", "")
+  next_hop_gateway       = lookup(var.routes[count.index], "next_hop_internet", "false") == "true" ? "default-internet-gateway" : ""
   priority               = 1000
 
   depends_on = [
