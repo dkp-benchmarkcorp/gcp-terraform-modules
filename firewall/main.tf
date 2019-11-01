@@ -5,8 +5,8 @@ resource "google_compute_firewall" "default" {
 
   allow {
     protocol = lookup(var.firewall[count.index], "protocol", "")
-    ports    = lookup(var.port[count.index], "ports", [""])
+    ports    = var.port
   }
 
-  source_tags = compact(split(",", lookup(var.port[count.index], "tags", [""])))
+  source_tags = var.source_tags
 }

@@ -5,7 +5,13 @@ variable "firewall" {
 }
 
 variable "port" {
-  type        = list(map(list))
+  type        = list
+  description = "List of firewall rules"
+  default     = []
+}
+
+variable "source_tag" {
+  type        = list
   description = "List of firewall rules"
   default     = []
 }
