@@ -8,5 +8,5 @@ resource "google_compute_firewall" "default" {
     ports    = lookup(each.value, "ports", "")
   }
 
-source_tags = lookup(var.firewall, "source_tags", "")
+source_tags = lookup(each.value, "source_tags", "")
 }
