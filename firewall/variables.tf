@@ -4,7 +4,7 @@ variable "firewall" {
   default     = []
 }
 
-variable "network_name" {
+variable "network" {
     description = "vpc_network"
     type        = "string"
 }
