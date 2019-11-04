@@ -2,7 +2,7 @@
 
 This module handles firewall rule creation in gcp
 The resources/services/activations/deletions that this module will create/trigger are:
-- Create firewall rule
+- Create firewall rules
 
 ## Compatibility
 
