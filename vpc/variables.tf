@@ -26,26 +26,16 @@ variable "routing_mode" {
     default     = "GLOBAL"
 }           
 
-variable "subnetworks_name" {
-    description = "Sets the network-wide routing mode for Cloud Routers to use. Accepted values are GLOBAL or REGIONAL."
-    type        = "string"
-    default     = "GLOBAL"
-}   
-variable "subnetworks_cidr" {
-    description = "Sets the network-wide routing mode for Cloud Routers to use. Accepted values are GLOBAL or REGIONAL."
-    type        = "string"
-    default     = "GLOBAL"
-}             
-variable "secondary_name" {
-    description = "Sets the network-wide routing mode for Cloud Routers to use. Accepted values are GLOBAL or REGIONAL."
-    type        = "string"
-    default     = "GLOBAL"
-}             
-variable "secondary_cidr" {
-    description = "Sets the network-wide routing mode for Cloud Routers to use. Accepted values are GLOBAL or REGIONAL."
-    type        = "string"
-    default     = "GLOBAL"
-}  
+variable "subnetworks" {
+  type        = list(map(string))
+  description = "The list of subnets being created"
+}
+           
+variable "secondary_ranges" {
+  type        = map(list(object({ range_name = string, ip_cidr_range = string })))
+  description = "Secondary ranges that will be used in some of the subnets"
+  default     = {}
+}
 
 variable "description" {
   type        = string
