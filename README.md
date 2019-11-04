@@ -1,11 +1,20 @@
 # Terraform modules for GCP 
 
 A registry of modules to create a GCP environment 
-The resources/services/activations/deletions that this module will create/trigger are:
-- Module for VPN
+The resources/services/activations/deletions that these modules include are:
+- Module for creation of VPC
+    - network
+    - subnetworks
+    - secondary networks
+    - routes
 - Module for NAT
+    - cloud router
+    - nat
 - Module for Firewall Rules
+    - firewall rules ingress/egress
 - Module for GKE
+    - Private GKE cluster
+    - Node Pool
 
 ## Compatibility
 
