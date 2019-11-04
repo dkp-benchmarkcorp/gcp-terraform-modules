@@ -13,8 +13,8 @@ The resources/services/activations/deletions that these modules include are:
 - Module for Firewall Rules
     - firewall rules ingress/egress
 - Module for GKE
-    - Private GKE cluster
-    - Node Pool
+    - private GKE cluster
+    - node Pool
 
 ## Compatibility
 
