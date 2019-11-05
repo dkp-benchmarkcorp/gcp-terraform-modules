@@ -9,27 +9,27 @@ output "network_self_link" {
 }
 
 output "subnet_names" {
-  value       = google_compute_subnetwork.subnet.name
+  value       = google_compute_subnetwork.subnetwork.name
   description = "The names of the subnets being created"
 }
 
 output "subnet_ips" {
-  value       = google_compute_subnetwork.subnet.ip_cidr_range
+  value       = google_compute_subnetwork.subnetwork.ip_cidr_range
   description = "The IPs and CIDRs of the subnets being created"
 }
 
 output "subnet_self_links" {
-  value       = google_compute_subnetwork.subnet.self_link
+  value       = google_compute_subnetwork.subnetwork.self_link
   description = "The self-links of subnets being created"
 }
 
 output "subnet_regions" {
-  value       = google_compute_subnetwork.subnet.region
+  value       = google_compute_subnetwork.subnetwork.region
   description = "The region where the subnets will be created"
 }
 
 output "subnet_secondary_ranges" {
-  value       = google_compute_subnetwork.subnet.secondary_ip_range
+  value       = google_compute_subnetwork.subnetwork.secondary_ip_range
   description = "The secondary ranges associated with these subnets"
 }
 
