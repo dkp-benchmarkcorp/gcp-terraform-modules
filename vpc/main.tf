@@ -27,13 +27,13 @@ data "google_compute_network" "vpc_network" {
 ### SUBNETS
 
 resource "google_compute_subnetwork" "subnetwork" {
-      count                    = length(var.subnetwork)
-      name                     = lookup(var.subnetwork[count.index], "subnet_name", "")
-      ip_cidr_range            = lookup(var.subnetwork[count.index], "subnet_ip", "")
+      count                    = length(var.subnet)
+      name                     = lookup(var.subnet[count.index], "subnet_name", "")
+      ip_cidr_range            = lookup(var.subnet[count.index], "subnet_ip", "")
       network                  = local.network_self_link
       depends_on               = [google_compute_network.vpc_network]
-      secondary_ip_range       = [for i in range(length(contains(keys(var.secondary_ranges), var.subnetwork[count.index]["subnet_name"]) == true ? var.secondary_ranges[var.subnetwork[count.index]["subnet_name"]] : [])) : var.secondary_ranges[var.subnetwork[count.index]["subnet_name"]][i]]
-      description              = lookup(var.subnetwork[count.index], "description", null)
+      secondary_ip_range       = [for i in range(length(contains(keys(var.secondary_ranges), var.subnet[count.index]["subnet_name"]) == true ? var.secondary_ranges[var.subnet[count.index]["subnet_name"]] : [])) : var.secondary_ranges[var.subnet[count.index]["subnet_name"]][i]]
+      description              = lookup(var.subnet[count.index], "description", null)
   }
 
   data "google_compute_subnetwork" "created_subnets" {
