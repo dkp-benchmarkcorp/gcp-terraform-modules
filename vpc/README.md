@@ -20,8 +20,11 @@ intended for Terraform 0.11.x is [3.0.0].
 ```hcl
 module "vpc" {
     source = "git::https://gitlab.com/kwdevops/gcp-terraform-modules//vpc"
+    
+    network_name = "example-vpc"
+    routing_mode = "GLOBAL"
 
-    subnetwork = [
+    subnet = [
         {
             subnet_name           = "subnet-01"
             subnet_ip             = "10.10.10.0/24"
