@@ -33,7 +33,7 @@ output "subnet_secondary_ranges" {
   description = "The secondary ranges associated with these subnets"
 }
 
-#output "routes" {
-#  value       = google_compute_route.route[count.index].name
-#  description = "The routes associated with this VPC"
-#}
+output "routes" {
+  value       = google_compute_route.route.*.name
+  description = "The routes associated with this VPC"
+}
