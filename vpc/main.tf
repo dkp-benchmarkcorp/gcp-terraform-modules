@@ -26,7 +26,7 @@ data "google_compute_network" "vpc_network" {
 
 ### SUBNETS
 
-resource "google_compute_subnetwork" "subnetwork" {
+resource "google_compute_subnetwork" "subnet" {
       count                    = length(var.subnet)
       name                     = lookup(var.subnet[count.index], "subnet_name", "")
       ip_cidr_range            = lookup(var.subnet[count.index], "subnet_ip", "")
@@ -37,8 +37,8 @@ resource "google_compute_subnetwork" "subnetwork" {
   }
 
   data "google_compute_subnetwork" "created_subnets" {
-  name    = google_compute_subnetwork.subnetwork.name
-  region  = google_compute_subnetwork.subnetwork.region
+  name    = google_compute_subnetwork.subnet.name
+  region  = google_compute_subnetwork.subnet.region
 }
 
 
