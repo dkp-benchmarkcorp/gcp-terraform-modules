@@ -31,7 +31,6 @@ resource "google_compute_subnetwork" "subnetwork" {
       name                     = lookup(var.subnet[count.index], "subnet_name", "")
       ip_cidr_range            = lookup(var.subnet[count.index], "subnet_ip", "")
       network                  = local.network_self_link
-      depends_on               = [google_compute_network.vpc_network]
       secondary_ip_range       = [for i in range(length(contains(keys(var.secondary_ranges), var.subnet[count.index]["subnet_name"]) == true ? var.secondary_ranges[var.subnet[count.index]["subnet_name"]] : [])) : var.secondary_ranges[var.subnet[count.index]["subnet_name"]][i]]
       description              = lookup(var.subnet[count.index], "description", null)
       depends_on               = [google_compute_network.vpc_network]
