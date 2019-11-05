@@ -1,3 +1,7 @@
+variable "project_id" {
+  description = "The ID of the project where this VPC will be created"
+}
+
 variable "create_network" {
   type        = bool
   default     = true
@@ -14,11 +18,11 @@ variable "auto_create_subnetworks" {
     type        = "string"
     default     = "true"
 }
-#variable "shared_vpc_host" {
-#  type        = string
-#  description = "Makes this project a Shared VPC host if 'true' (default 'false')"
-#  default     = "false"
-#}
+variable "shared_vpc_host" {
+  type        = string
+  description = "Makes this project a Shared VPC host if 'true' (default 'false')"
+  default     = "false"
+}
 
 variable "routing_mode" {
     description = "Sets the network-wide routing mode for Cloud Routers to use. Accepted values are GLOBAL or REGIONAL."
@@ -26,26 +30,16 @@ variable "routing_mode" {
     default     = "GLOBAL"
 }           
 
-variable "subnetworks_name" {
-    description = "Sets the network-wide routing mode for Cloud Routers to use. Accepted values are GLOBAL or REGIONAL."
-    type        = "string"
-    default     = "GLOBAL"
-}   
-variable "subnetworks_cidr" {
-    description = "Sets the network-wide routing mode for Cloud Routers to use. Accepted values are GLOBAL or REGIONAL."
-    type        = "string"
-    default     = "GLOBAL"
-}             
-variable "secondary_name" {
-    description = "Sets the network-wide routing mode for Cloud Routers to use. Accepted values are GLOBAL or REGIONAL."
-    type        = "string"
-    default     = "GLOBAL"
-}             
-variable "secondary_cidr" {
-    description = "Sets the network-wide routing mode for Cloud Routers to use. Accepted values are GLOBAL or REGIONAL."
-    type        = "string"
-    default     = "GLOBAL"
-}  
+variable "subnet" {
+  type        = list(map(string))
+  description = "The list of subnets being created"
+}
+           
+variable "secondary_ranges" {
+  type        = map(list(object({ range_name = string, ip_cidr_range = string })))
+  description = "Secondary ranges that will be used in some of the subnets"
+  default     = {}
+}
 
 variable "description" {
   type        = string

@@ -2,7 +2,7 @@
 
 This module handles firewall rule creation in gcp
 The resources/services/activations/deletions that this module will create/trigger are:
-- Create firewall rule
+- Create firewall rules
 
 ## Compatibility
 
@@ -31,6 +31,13 @@ module "firewall" {
             protocol             = "tcp"
             ports                = 80
             source_tags          = "http"
+        },
+        {
+            name                 = "range"
+            network              = module.vpc.network_name
+            protocol             = "tcp"
+            ports                = "500-550"
+            source_tags          = "range"
         },
     ]
 } 

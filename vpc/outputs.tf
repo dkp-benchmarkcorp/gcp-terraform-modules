@@ -8,32 +8,32 @@ output "network_self_link" {
   description = "The URI of the VPC being created"
 }
 
-output "subnets_names" {
-  value       = google_compute_subnetwork.subnetwork.name
+output "subnet_names" {
+  value       = google_compute_subnetwork.subnetwork.*.name
   description = "The names of the subnets being created"
 }
 
-output "subnets_ips" {
-  value       = google_compute_subnetwork.subnetwork.ip_cidr_range
+output "subnet_ips" {
+  value       = google_compute_subnetwork.subnetwork.*.ip_cidr_range
   description = "The IPs and CIDRs of the subnets being created"
 }
 
-output "subnets_self_links" {
-  value       = google_compute_subnetwork.subnetwork.self_link
+output "subnet_self_links" {
+  value       = google_compute_subnetwork.subnetwork.*.self_link
   description = "The self-links of subnets being created"
 }
 
-output "subnets_regions" {
-  value       = google_compute_subnetwork.subnetwork.region
+output "subnet_regions" {
+  value       = google_compute_subnetwork.subnetwork.*.region
   description = "The region where the subnets will be created"
 }
 
-output "subnets_secondary_ranges" {
-  value       = google_compute_subnetwork.subnetwork.secondary_ip_range
+output "subnet_secondary_ranges" {
+  value       = google_compute_subnetwork.subnetwork[*].secondary_ip_range
   description = "The secondary ranges associated with these subnets"
 }
 
-#output "routes" {
-#  value       = google_compute_route.route[count.index].name
-#  description = "The routes associated with this VPC"
-#}
+output "routes" {
+  value       = google_compute_route.route.*.name
+  description = "The routes associated with this VPC"
+}

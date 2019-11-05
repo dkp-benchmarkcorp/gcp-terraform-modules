@@ -19,28 +19,27 @@ data "google_compute_network" "vpc_network" {
 
 ###	Shared VPC
 
-#resource "google_compute_shared_vpc_host_project" "shared_vpc_host" {
-#  count   = var.shared_vpc_host == "true" ? 1 : 0
-#  project = var.project_id
-#}
+resource "google_compute_shared_vpc_host_project" "shared_vpc_host" {
+  count   = var.shared_vpc_host == "true" ? 1 : 0
+  project = var.project_id
+}
 
 ### SUBNETS
 
 resource "google_compute_subnetwork" "subnetwork" {
-     
-      name          = var.subnetworks_name
-      ip_cidr_range = var.subnetworks_cidr
-      network       = local.network_self_link
-      depends_on    = [google_compute_network.vpc_network]
-      secondary_ip_range {
-          range_name    = var.secondary_name
-          ip_cidr_range = var.secondary_cidr
-      }
+      count                    = length(var.subnet)
+      name                     = var.subnet[count.index]["subnet_name"]
+      ip_cidr_range            = var.subnet[count.index]["subnet_ip"]
+      network                  = local.network_self_link
+      secondary_ip_range       = [for i in range(length(contains(keys(var.secondary_ranges), var.subnet[count.index]["subnet_name"]) == true ? var.secondary_ranges[var.subnet[count.index]["subnet_name"]] : [])) : var.secondary_ranges[var.subnet[count.index]["subnet_name"]][i]]
+      description              = lookup(var.subnet[count.index], "description", null)
+      depends_on               = [google_compute_network.vpc_network]
   }
 
   data "google_compute_subnetwork" "created_subnets" {
-  name    = google_compute_subnetwork.subnetwork.name
-  region  = google_compute_subnetwork.subnetwork.region
+  count   = length(var.subnet)
+  name    = element(google_compute_subnetwork.subnetwork.*.name, count.index)
+  region  = element(google_compute_subnetwork.subnetwork.*.region, count.index)
 }
 
 
