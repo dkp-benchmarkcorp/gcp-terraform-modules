@@ -21,18 +21,18 @@ intended for Terraform 0.11.x is [3.0.0].
 module "vpc" {
     source = "git::https://gitlab.com/kwdevops/gcp-terraform-modules//vpc"
 
-    subnets = [
+    subnetwork = [
         {
-            subnetwork_name           = "subnet-01"
-            subnetwork_ip             = "10.10.10.0/24"
-            subnetwork_region         = "us-east1"
+            subnet_name           = "subnet-01"
+            subnet_ip             = "10.10.10.0/24"
+            subnet_region         = "us-east1"
         },
         {
-            subnetwork_name           = "subnet-02"
-            subnetwork_ip             = "10.10.20.0/24"
-            subnetwork_region         = "us-west1"
-            subnetwork_private_access = "true"
-            subnetwork_flow_logs      = "true"
+            subnet_name           = "subnet-02"
+            subnet_ip             = "10.10.20.0/24"
+            subnet_region         = "us-west1"
+            subnet_private_access = "true"
+            subnet_flow_logs      = "true"
             description           = "This subnet has a description"
         },
     ]
