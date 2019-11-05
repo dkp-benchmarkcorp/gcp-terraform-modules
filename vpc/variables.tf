@@ -26,7 +26,7 @@ variable "routing_mode" {
     default     = "GLOBAL"
 }           
 
-variable "subnetworks" {
+variable "subnetwork" {
   type        = list(map(string))
   description = "The list of subnets being created"
 }
