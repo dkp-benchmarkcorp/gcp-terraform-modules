@@ -32,6 +32,13 @@ module "firewall" {
             ports                = 80
             source_tags          = "http"
         },
+        {
+            name                 = "range"
+            network              = module.vpc.network_name
+            protocol             = "tcp"
+            ports                = "500-550"
+            source_tags          = "range"
+        },
     ]
 } 
 ```
