@@ -9,7 +9,7 @@ variable "amount" {
   default     = 1
 }
 
-variable "machine" { 
+variable "machine_type" { 
     type = string
     description = "machine size"
     default = "n1-standard-1"
