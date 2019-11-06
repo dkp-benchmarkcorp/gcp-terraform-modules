@@ -1,3 +1,4 @@
+```hcl
 module "gke" {
   source                     = "terraform-google-modules/kubernetes-engine/google//modules/private-cluster"
  cluster = [
@@ -78,3 +79,4 @@ module "gke" {
       "default-node-pool",
     ]
   }
+  ```
