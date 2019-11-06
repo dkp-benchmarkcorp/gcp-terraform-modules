@@ -1,4 +1,4 @@
-variable "name" {
+variable "name_prefix" {
   type = string
   description = "Machine prefix"
 }
@@ -28,6 +28,12 @@ variable "image" {
 }
 
 variable "network" {
+    type = string
+    description = "the network to host host compute instances"
+    default = "default"
+}
+
+variable "subnet" {
     type = string
     description = "the network to host host compute instances"
     default = "default"
