@@ -8,8 +8,10 @@ resource "google_container_cluster" "primary" {
   cluster_ipv4_cidr = lookup(var.cluster[count.index], "cluster_ipv4_cidr", "")
   network           = lookup(var.cluster[count.index], "network", "")
   network_policy    = lookup(var.cluster[count.index], "network_policy", "")
- 
-  remove_default_node_pool = true
+  enable_private_endpoint    = lookup(var.cluster[count.index], "enable_private_endpoint", "")
+  enable_private_nodes       = lookup(var.cluster[count.index], "enable_private_nodes", "")
+  master_ipv4_cidr_block     = lookup(var.cluster[count.index], "master_ipv4_cidr_block", "")
+  remove_default_node_pool = lookup(var.cluster[count.index], "remove_default_node_pool", "")
   initial_node_count = lookup(var.cluster[count.index], "initial_node_count", "")
 
   master_auth {
@@ -20,17 +22,42 @@ resource "google_container_cluster" "primary" {
       issue_client_certificate = false
     }
   }
+  addons_config {
+    http_load_balancing {
+      disabled = lookup(var.cluster[count.index], "http_load_balancing", "")
+    }
+
+    horizontal_pod_autoscaling {
+      disabled = lookup(var.cluster[count.index], "horizontal_pod_autoscaling", "")
+    }
+
+    kubernetes_dashboard {
+      disabled = lookup(var.cluster[count.index], "kubernetes_dashboard", "")
+    }
+
+    network_policy_config {
+      disabled = lookup(var.cluster[count.index], "network_policy_config", "")
+    }
+  }
+
+  ip_allocation_policy {
+    cluster_secondary_range_name  = lookup(var.cluster[count.index], "cluster_secondary_range_name", "")
+    services_secondary_range_name = lookup(var.cluster[count.index], "services_secondary_range_name", "")
+  }
 }
 
+
+
 resource "google_container_node_pool" "primary_preemptible_nodes" {
-  name       = "my-node-pool"
-  location   = "us-central1"
+    count    = length(var.node_pools)
+  name       = var.node_pools[count.index]["name"]
+  location   = lookup(var.node_pools[count.index], "location", "")
   cluster    = "${google_container_cluster.primary.name}"
-  node_count = 1
+  node_count = lookup(var.node_pools[count.index], "node_count", "")
 
   node_config {
     preemptible  = true
-    machine_type = "n1-standard-1"
+    machine_type = lookup(var.node_pools[count.index], "machine_type", "")
 
     metadata = {
       disable-legacy-endpoints = "true"
