@@ -27,12 +27,6 @@ variable "image" {
     default = "ubuntu-1904-disco-v20191019"
 }
 
-variable "network" {
-    type = string
-    description = "the network to host host compute instances"
-    default = "default"
-}
-
 variable "subnet" {
     type = string
     description = "the network to host host compute instances"
