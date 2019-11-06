@@ -17,7 +17,7 @@ intended for Terraform 0.11.x is [3.0.0].
 module "compute" {
     source = "git::https://gitlab.com/kwdevops/gcp-terraform-modules//compute"
      
-    count        = 2
+    amount       = 2
     name         = web
     machine_type = n1-standard-1
     zone         = us-east1-b

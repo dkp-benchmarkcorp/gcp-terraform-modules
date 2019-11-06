@@ -3,7 +3,7 @@ variable "name" {
   description = "Machine prefix"
 }
 
-variable "count" {
+variable "amount" {
   type        = string
   description = "the amount of comute nodes to create"
   default     = 1
