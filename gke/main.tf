@@ -2,16 +2,17 @@ resource "google_container_cluster" "primary" {
   count             = length(var.cluster)
   name              = lookup(var.cluster[count.index], "name", "")
   description       = lookup(var.cluster[count.index], "description", "")
-
   location          = lookup(var.cluster[count.index], "location", "")
-  node_locations    = lookup(var.cluster[count.index], "node_locations", "")
   cluster_ipv4_cidr = lookup(var.cluster[count.index], "cluster_ipv4_cidr", "")
-  network           = lookup(var.cluster[count.index], "network", "")
-  enable_private_endpoint    = lookup(var.cluster[count.index], "enable_private_endpoint", "")
-  enable_private_nodes       = lookup(var.cluster[count.index], "enable_private_nodes", "")
-  master_ipv4_cidr_block     = lookup(var.cluster[count.index], "master_ipv4_cidr_block", "")
+  subnetwork           = lookup(var.cluster[count.index], "subnetwork", "")
   remove_default_node_pool = lookup(var.cluster[count.index], "remove_default_node_pool", "")
   initial_node_count = lookup(var.cluster[count.index], "initial_node_count", "")
+
+  private_cluster_config {
+    enable_private_endpoint = lookup(var.cluster[count.index], "enable_private_endpoint", "")
+    enable_private_nodes    = lookup(var.cluster[count.index], "enable_private_nodes", "")
+    master_ipv4_cidr_block  = lookup(var.cluster[count.index], "master_ipv4_cidr_block", "")
+  }
 
   master_auth {
     username = ""
@@ -21,6 +22,7 @@ resource "google_container_cluster" "primary" {
       issue_client_certificate = false
     }
   }
+ 
   addons_config {
     http_load_balancing {
       disabled = lookup(var.cluster[count.index], "http_load_balancing", "")
@@ -45,7 +47,18 @@ resource "google_container_cluster" "primary" {
   }
 }
 
-
+  dynamic "master_authorized_networks_config" {
+    for_each = var.master_authorized_networks_config
+    content {
+      dynamic "cidr_blocks" {
+        for_each = master_authorized_networks_config.value.cidr_blocks
+        content {
+          cidr_block   = lookup(cidr_blocks.value, "cidr_block", "")
+          display_name = lookup(cidr_blocks.value, "display_name", "")
+        }
+      }
+    }
+  }
 
 resource "google_container_node_pool" "primary_preemptible_nodes" {
   count    = length(var.node_pools)
