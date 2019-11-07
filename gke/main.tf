@@ -7,7 +7,6 @@ resource "google_container_cluster" "primary" {
   node_locations    = lookup(var.cluster[count.index], "node_locations", "")
   cluster_ipv4_cidr = lookup(var.cluster[count.index], "cluster_ipv4_cidr", "")
   network           = lookup(var.cluster[count.index], "network", "")
-  network_policy    = lookup(var.cluster[count.index], "network_policy", "")
   enable_private_endpoint    = lookup(var.cluster[count.index], "enable_private_endpoint", "")
   enable_private_nodes       = lookup(var.cluster[count.index], "enable_private_nodes", "")
   master_ipv4_cidr_block     = lookup(var.cluster[count.index], "master_ipv4_cidr_block", "")
