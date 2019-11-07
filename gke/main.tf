@@ -7,19 +7,14 @@ resource "google_container_cluster" "primary" {
   subnetwork           = lookup(var.cluster[count.index], "subnetwork", "")
   remove_default_node_pool = lookup(var.cluster[count.index], "remove_default_node_pool", "")
   initial_node_count = lookup(var.cluster[count.index], "initial_node_count", "")
+  master_authorized_networks_config = [var.master_authorized_networks_config]
 
   private_cluster_config {
     enable_private_endpoint = lookup(var.cluster[count.index], "enable_private_endpoint", "")
     enable_private_nodes    = lookup(var.cluster[count.index], "enable_private_nodes", "")
     master_ipv4_cidr_block  = lookup(var.cluster[count.index], "master_ipv4_cidr_block", "")
   }
-  master_authorized_networks_config {
-         cidr_blocks = [{
-          count             = length(var.cidr_blocks)
-          cidr_block   = lookup(var.cidr_blocks[count.index], "cidr_block", "")
-          display_name = lookup(var.cidr_blocks[count.index], "display_name", "")
-         },]
-        }
+ 
   master_auth {
     username = ""
     password = ""
