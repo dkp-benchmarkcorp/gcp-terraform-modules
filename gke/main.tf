@@ -47,19 +47,12 @@ resource "google_container_cluster" "primary" {
   }
 }
 
-  dynamic "master_authorized_networks_config" {
-    for_each = var.master_authorized_networks_config
-    content {
-      dynamic "cidr_blocks" {
-        for_each = master_authorized_networks_config.value.cidr_blocks
-        content {
-          cidr_block   = lookup(cidr_blocks.value, "cidr_block", "")
-          display_name = lookup(cidr_blocks.value, "display_name", "")
+ master_authorized_networks_config {
+          count             = length(var.cluster)
+          cidr_block   = [lookup(var.cidr_blocks[count.index], "cidr_block", "")]
+          display_name = [lookup(var.cidr_blocks[count.index], "display_name", "")]
         }
-      }
-    }
-  }
-
+    
 resource "google_container_node_pool" "primary_preemptible_nodes" {
   count    = length(var.node_pools)
   name       = var.node_pools[count.index]["name"]
