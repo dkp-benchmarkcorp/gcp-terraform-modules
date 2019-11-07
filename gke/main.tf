@@ -8,6 +8,7 @@ resource "google_container_cluster" "primary" {
   subnetwork           = lookup(var.cluster[count.index], "subnetwork", "")
   remove_default_node_pool = lookup(var.cluster[count.index], "remove_default_node_pool", "")
   initial_node_count = lookup(var.cluster[count.index], "initial_node_count", "")
+  default_max_pods_per_node = lookup(var.cluster[count.index], "default_max_pods_per_node", "")
   
   master_authorized_networks_config {
     cidr_blocks {

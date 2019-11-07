@@ -32,3 +32,9 @@ variable "subnetwork" {
     description = "the network to host host compute instances"
     default = "default"
 }
+
+variable "tags" {
+    type = string
+    description = "the network to host host compute instances"
+    default = "default"
+}
