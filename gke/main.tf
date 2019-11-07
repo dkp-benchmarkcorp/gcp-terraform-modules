@@ -4,9 +4,11 @@ resource "google_container_cluster" "primary" {
   description       = lookup(var.cluster[count.index], "description", "")
   location          = lookup(var.cluster[count.index], "location", "")
   cluster_ipv4_cidr = lookup(var.cluster[count.index], "cluster_ipv4_cidr", "")
+  network           = lookup(var.cluster[count.index], "network", "")
   subnetwork           = lookup(var.cluster[count.index], "subnetwork", "")
   remove_default_node_pool = lookup(var.cluster[count.index], "remove_default_node_pool", "")
   initial_node_count = lookup(var.cluster[count.index], "initial_node_count", "")
+  
   master_authorized_networks_config {
     cidr_blocks {
       cidr_block   = lookup(var.cluster[count.index], "cidr_block", "")
