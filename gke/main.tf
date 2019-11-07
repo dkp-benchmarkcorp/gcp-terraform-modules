@@ -16,8 +16,8 @@ resource "google_container_cluster" "primary" {
   master_authorized_networks_config {
          cidr_blocks = [
           count             = length(var.cidr_blocks)
-          cidr_block   = [lookup(var.cidr_blocks[count.index], "cidr_block", "")]
-          display_name = [lookup(var.cidr_blocks[count.index], "display_name", "")]
+          cidr_block   = lookup(var.cidr_blocks[count.index], "cidr_block", "")
+          display_name = lookup(var.cidr_blocks[count.index], "display_name", "")
          ]
         }
   master_auth {
