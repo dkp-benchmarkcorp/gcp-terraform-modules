@@ -2,7 +2,7 @@ resource "google_compute_firewall" "default" {
  count              = length(var.firewall)
  name               = lookup(var.firewall[count.index], "name", "")
  network            = lookup(var.firewall[count.index], "network", "")
- source_ranges = [lookup(var.firewall[count.index], "source_ranges", "")]
+ destination_ranges = [lookup(var.firewall[count.index], "destination_ranges", "")]
 
  allow {
    protocol         = lookup(var.firewall[count.index], "protocol", "")
