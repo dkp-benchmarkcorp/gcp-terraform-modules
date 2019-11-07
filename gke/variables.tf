@@ -21,3 +21,5 @@ variable "master_authorized_networks_config" {
     }],
   }]
   EOF
+   default = []
+}
