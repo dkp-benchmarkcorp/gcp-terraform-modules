@@ -13,7 +13,11 @@ resource "google_container_cluster" "primary" {
     enable_private_nodes    = lookup(var.cluster[count.index], "enable_private_nodes", "")
     master_ipv4_cidr_block  = lookup(var.cluster[count.index], "master_ipv4_cidr_block", "")
   }
-
+  master_authorized_networks_config {
+          count             = length(var.cidr_blocks)
+          cidr_block   = [lookup(var.cidr_blocks[count.index], "cidr_block", "")]
+          display_name = [lookup(var.cidr_blocks[count.index], "display_name", "")]
+        }
   master_auth {
     username = ""
     password = ""
@@ -47,12 +51,6 @@ resource "google_container_cluster" "primary" {
   }
 }
 
- master_authorized_networks_config {
-          count             = length(var.cidr_blocks)
-          cidr_block   = [lookup(var.cidr_blocks[count.index], "cidr_block", "")]
-          display_name = [lookup(var.cidr_blocks[count.index], "display_name", "")]
-        }
-    
 resource "google_container_node_pool" "primary_preemptible_nodes" {
   count    = length(var.node_pools)
   name       = var.node_pools[count.index]["name"]
