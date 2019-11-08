@@ -6,5 +6,6 @@ resource "google_compute_firewall" "default" {
    protocol = lookup(var.firewall[count.index], "protocol", "")
    ports    = [lookup(var.firewall[count.index], "ports", "")]
  }
- source_tags = [lookup(var.firewall[count.index], "source_tags", "")]
+ source_ranges = [lookup(var.firewall[count.index], "source_ranges", "")]
+ target_tags = [lookup(var.firewall[count.index], "target_tags", "")]
 }
