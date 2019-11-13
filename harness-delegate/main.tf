@@ -15,7 +15,6 @@ resource "google_compute_instance" "delegate" {
       // Ephemeral IP
     }
   }
-}
 provisioner "file" {
     source      = "/conf/delegte.sh"
     destination = "/home/ubuntu/delegate.sh"
