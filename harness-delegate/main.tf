@@ -21,7 +21,7 @@ metadata = {
 connection {
     type     = "ssh"
     user     = "matt.s.cole"
-    private_key = "${file("~/.ssh/id_rsa}"
+    private_key = "${file("~/.ssh/id_rsa)}"
     host     = self.network_interface.0.access_config.0.nat_ip
   }
 provisioner "file" {
