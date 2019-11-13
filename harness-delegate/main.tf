@@ -15,13 +15,8 @@ resource "google_compute_instance" "delegate" {
       // Ephemeral IP
     }
   }
-metadata {
-        startup-script = <<SCRIPT
-${file("${path.module}/scripts/start-up-script.sh")}
-SCRIPT
-    }
-}
 
+metadata_startup_script = "${file("${path.module}/scripts/start-up-script.sh")}"
 
 output "ip" {
   value = google_compute_instance.delegate.network_interface.0.access_config.0.nat_ip
