@@ -16,12 +16,12 @@ resource "google_compute_instance" "delegate" {
     }
   }
 metadata = {
-    ssh-keys = "matt.s.cole"
+    ssh-keys = "mattcole"
   }
 connection {
     type     = "ssh"
     user     = "matt.s.cole"
-    private_key = "${file("~/.ssh/id_rsa")}"
+    private_key = "${file("id_rsa")}"
     host     = self.network_interface.0.access_config.0.nat_ip
   }
 provisioner "file" {
