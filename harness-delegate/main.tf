@@ -15,7 +15,7 @@ resource "google_compute_instance" "delegate" {
       // Ephemeral IP
     }
   }
-metadata_startup_script = { <<EOF
+metadata_startup_script = <<EOF
  "sudo apt-get update
 sudo apt-get install \
     apt-transport-https \
@@ -50,9 +50,9 @@ sudo docker run -d --restart unless-stopped --hostname=$(hostname -f) \
 -e PROXY_MANAGER=true \
 -e POLL_FOR_TASKS=false \
 -e HELM_DESIRED_VERSION= \
-harness/delegate:latest   
+harness/delegate:latest" 
 EOF
-  }
+
 
 output "ip" {
   value = google_compute_instance.delegate.network_interface.0.access_config.0.nat_ip
