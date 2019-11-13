@@ -15,15 +15,33 @@ resource "google_compute_instance" "delegate" {
       // Ephemeral IP
     }
   }
+metadata {
+    ssh-keys = "matt.s.cole"
+  }
+connection {
+    type     = "ssh"
+    user     = "ubuntu"
+    private_key = "${file("~/.ssh/id_rsa.pub")}"
+    host     = self.public_ip
+  }
 provisioner "file" {
-    source      = "/conf/delegte.sh"
+    source      = "conf/delegate.sh"
     destination = "/home/ubuntu/delegate.sh"
+    
   }
 
+provisioner "file" {
+    source      = "conf/install_docker.sh"
+    destination = "/home/ubuntu/install_docker.sh"
+}
   provisioner "remote-exec" {
     inline = [
-      "chmod +x /home/ubuntu/delegate.sh",
-      "/home/ubuntu/delegate.sh",
+      "curl -fsSL https://get.docker.com -o /home/ubuntu/get-docker.sh",
+      "sudo chmod +x /home/ubuntu/get-docker.sh",
+      "sudo sh /home/ubuntu/get-docker.sh",
     ]
   }
+}
+output "ip" {
+  value = aws_instance.harness.public_ip
 }
