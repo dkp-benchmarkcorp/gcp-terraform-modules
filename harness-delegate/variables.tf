@@ -27,4 +27,7 @@ variable "subnetwork" {
     type = string
     default = ""
 }
-   
+variable "key" {
+    type = string
+    default = ""
+}   
