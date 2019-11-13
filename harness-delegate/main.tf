@@ -15,7 +15,7 @@ resource "google_compute_instance" "delegate" {
       // Ephemeral IP
     }
   }
-metadata_startup_script = {
+metadata_startup_script = { <<EOF
  "sudo apt-get update
 sudo apt-get install \
     apt-transport-https \
@@ -32,7 +32,6 @@ sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io
  sudo usermod -aG docker $(whoami)"
  sudo docker pull harness/delegate:latest
-
 sudo docker run -d --restart unless-stopped --hostname=$(hostname -f) \
 -e ACCOUNT_ID=Cu_0_Hw6RbKRL9QT-0DjKw \
 -e ACCOUNT_SECRET=730f5a74d25c8ac877d1e095653b031e \
@@ -52,6 +51,7 @@ sudo docker run -d --restart unless-stopped --hostname=$(hostname -f) \
 -e POLL_FOR_TASKS=false \
 -e HELM_DESIRED_VERSION= \
 harness/delegate:latest   
+EOF
   }
 
 output "ip" {
