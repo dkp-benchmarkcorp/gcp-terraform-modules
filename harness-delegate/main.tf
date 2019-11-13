@@ -15,33 +15,45 @@ resource "google_compute_instance" "delegate" {
       // Ephemeral IP
     }
   }
-metadata = {
-    ssh-keys = "mattcole"
-  }
-connection {
-    type     = "ssh"
-    user     = "matt.s.cole"
-    private_key = "${file("id_rsa")}"
-    host     = self.network_interface.0.access_config.0.nat_ip
-  }
-provisioner "file" {
-    source      = "conf/delegate.sh"
-    destination = "/home/ubuntu/delegate.sh"
-    
+metadata_startup_script = {
+ "sudo apt-get update
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+ sudo usermod -aG docker $(whoami)"
+ sudo docker pull harness/delegate:latest
+
+sudo docker run -d --restart unless-stopped --hostname=$(hostname -f) \
+-e ACCOUNT_ID=Cu_0_Hw6RbKRL9QT-0DjKw \
+-e ACCOUNT_SECRET=730f5a74d25c8ac877d1e095653b031e \
+-e MANAGER_HOST_AND_PORT=https://app.harness.io/gratis \
+-e WATCHER_STORAGE_URL=https://app.harness.io/storage/wingswatchers \
+-e WATCHER_CHECK_LOCATION=watcherprod.txt \
+-e DELEGATE_STORAGE_URL=https://app.harness.io/storage/wingsdelegates \
+-e DELEGATE_CHECK_LOCATION=delegatefree.txt \
+-e DEPLOY_MODE=KUBERNETES \
+-e PROXY_HOST= \
+-e PROXY_PORT= \
+-e PROXY_SCHEME= \
+-e PROXY_USER= \
+-e PROXY_PASSWORD= \
+-e NO_PROXY= \
+-e PROXY_MANAGER=true \
+-e POLL_FOR_TASKS=false \
+-e HELM_DESIRED_VERSION= \
+harness/delegate:latest   
   }
 
-provisioner "file" {
-    source      = "conf/install_docker.sh"
-    destination = "/home/ubuntu/install_docker.sh"
-}
-  provisioner "remote-exec" {
-    inline = [
-      "curl -fsSL https://get.docker.com -o /home/ubuntu/get-docker.sh",
-      "sudo chmod +x /home/ubuntu/get-docker.sh",
-      "sudo sh /home/ubuntu/get-docker.sh",
-    ]
-  }
-}
 output "ip" {
   value = google_compute_instance.delegate.network_interface.0.access_config.0.nat_ip
 }
