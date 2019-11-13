@@ -19,8 +19,8 @@ metadata {
         startup-script = <<SCRIPT
 ${file("${path.module}/scripts/start-up-script.sh")}
 SCRIPT
+    }
 }
-
 
 
 output "ip" {
