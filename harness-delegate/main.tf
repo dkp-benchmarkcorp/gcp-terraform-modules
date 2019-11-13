@@ -20,7 +20,7 @@ metadata {
   }
 connection {
     type     = "ssh"
-    user     = "ubuntu"
+    user     = "matt.s.cole"
     private_key = "${file("~/.ssh/id_rsa.pub")}"
     host     = self.public_ip
   }
