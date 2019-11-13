@@ -15,7 +15,8 @@ resource "google_compute_instance" "delegate" {
       // Ephemeral IP
     }
   }
-metadata_startup_script = <<EOF
+metadata_startup_script = <<EOF 
+{
  "sudo apt-get update
 sudo apt-get install \
     apt-transport-https \
@@ -51,6 +52,7 @@ sudo docker run -d --restart unless-stopped --hostname=$(hostname -f) \
 -e POLL_FOR_TASKS=false \
 -e HELM_DESIRED_VERSION= \
 harness/delegate:latest" 
+}
 EOF
 
 
