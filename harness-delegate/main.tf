@@ -17,7 +17,6 @@ resource "google_compute_instance" "delegate" {
   }
 
 metadata_startup_script = "${file("${path.module}/scripts/start-up-script.sh")}"
-
 }
 
 output "ip" {
