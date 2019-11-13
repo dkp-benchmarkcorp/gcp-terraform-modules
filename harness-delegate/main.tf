@@ -15,7 +15,7 @@ resource "google_compute_instance" "delegate" {
       // Ephemeral IP
     }
   }
-metadata {
+metadata = {
     ssh-keys = "matt.s.cole"
   }
 connection {
