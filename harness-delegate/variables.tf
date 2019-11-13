@@ -5,7 +5,7 @@ variable "name" {
 
 variable "machine_type" {
     type    = string
-    default = 
+    default = ""
 }
 
 variable "zone" {
