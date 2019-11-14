@@ -31,3 +31,8 @@ variable "key" {
     type = string
     default = ""
 }   
+
+variable "start-up-script-name" {
+    type = string
+    default = ""
+}
