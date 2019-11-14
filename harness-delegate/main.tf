@@ -17,7 +17,7 @@ resource "google_compute_instance" "delegate" {
   }
 
 metadata = {
-    startup-script = "${file("${path.module}/scripts/start-up-script")}"
+    startup-script = "${file("${path.root}/scripts/start-up-script")}"
 }
 
 }
