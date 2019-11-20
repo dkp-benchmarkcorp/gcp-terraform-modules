@@ -23,6 +23,6 @@ module "compute" {
     zone           = us-east1-b
     image          = ubuntu-1904-disco-v20191019
     network        = default
-    startup-script = 
+    startup-script = harness-delegate
 }   
 ```
