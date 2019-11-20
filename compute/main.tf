@@ -17,7 +17,7 @@ resource "google_compute_instance" "default" {
     }
   }
 metadata = {
-    startup-script = "${file("${path.root}/scripts/var.starup-script")}"
+    startup-script = "${file("${path.root}/scripts/${var.startup-script}")}"
 }
 
 }
