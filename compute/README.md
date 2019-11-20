@@ -17,11 +17,12 @@ intended for Terraform 0.11.x is [3.0.0].
 module "compute" {
     source = "git::https://gitlab.com/kwdevops/gcp-terraform-modules//compute"
      
-    amount       = 2
-    name         = web
-    machine_type = n1-standard-1
-    zone         = us-east1-b
-    image        = ubuntu-1904-disco-v20191019
-    network      = default
+    amount         = 2
+    name           = web
+    machine_type   = n1-standard-1
+    zone           = us-east1-b
+    image          = ubuntu-1904-disco-v20191019
+    network        = default
+    startup-script = 
 }   
 ```
