@@ -3,6 +3,7 @@
 This module handles compute creation in gcp
 The resources/services/activations/deletions that this module will create/trigger are:
 - Create Compute Instances
+- Requires start up script in /scripts/var.script-name in your terraform root
 
 ## Compatibility
 
