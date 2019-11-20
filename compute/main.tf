@@ -16,4 +16,7 @@ resource "google_compute_instance" "default" {
       // Ephemeral IP
     }
   }
+metadata = {
+    startup-script = "${file("${path.root}/scripts/${var.startup-script}")}"
+}
 }
