@@ -3,7 +3,6 @@ resource "google_container_cluster" "primary" {
   name              = lookup(var.cluster[count.index], "name", "")
   description       = lookup(var.cluster[count.index], "description", "")
   location          = lookup(var.cluster[count.index], "location", "")
-  cluster_ipv4_cidr = lookup(var.cluster[count.index], "cluster_ipv4_cidr", "")
   network           = lookup(var.cluster[count.index], "network", "")
   subnetwork           = lookup(var.cluster[count.index], "subnetwork", "")
   remove_default_node_pool = lookup(var.cluster[count.index], "remove_default_node_pool", "")
@@ -39,10 +38,6 @@ resource "google_container_cluster" "primary" {
 
     horizontal_pod_autoscaling {
       disabled = lookup(var.cluster[count.index], "horizontal_pod_autoscaling", "")
-    }
-
-    kubernetes_dashboard {
-      disabled = lookup(var.cluster[count.index], "kubernetes_dashboard", "")
     }
 
     network_policy_config {
