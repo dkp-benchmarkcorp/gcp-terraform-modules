@@ -10,12 +10,12 @@ variable "create_network" {
 
 variable "network_name" {
     description = "The name of the VPC being created."
-    type        = "string"
+    type        = string
 }    
 
 variable "auto_create_subnetworks" {
     description = "If set to true, this network will be created in auto subnet mode, and Google will create a subnet for each region automatically. If set to false, a custom subnetted network will be created that can support google_compute_subnetwork resources."
-    type        = "string"
+    type        = string
     default     = "true"
 }
 variable "shared_vpc_host" {
@@ -26,7 +26,7 @@ variable "shared_vpc_host" {
 
 variable "routing_mode" {
     description = "Sets the network-wide routing mode for Cloud Routers to use. Accepted values are GLOBAL or REGIONAL."
-    type        = "string"
+    type        = string
     default     = "GLOBAL"
 }           
 
