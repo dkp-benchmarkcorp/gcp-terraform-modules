@@ -55,7 +55,7 @@ resource "google_container_node_pool" "primary_preemptible_nodes" {
   count    = length(var.node_pools)
   name       = var.node_pools[count.index]["name"]
   location   = lookup(var.node_pools[count.index], "location", "")
-  cluster    = "${google_container_cluster.primary[0].name}"
+  cluster    = google_container_cluster.primary[0].name
   node_count = lookup(var.node_pools[count.index], "node_count", "")
   
   node_config {
