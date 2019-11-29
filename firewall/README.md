@@ -22,22 +22,19 @@ module "firewall" {
             name                 = "ssh"
             network              = module.vpc.network_name
             protocol             = "tcp"
-            ports                = 22
+            ports                = "22"
+            source_ranges        = "0.0.0.0/0"
             source_tags          = "ssh"
+            target_tags          = "ssh"
         },
         {
             name                 = "http"
             network              = module.vpc.network_name
             protocol             = "tcp"
-            ports                = 80
+            ports                = "80"
+            source_ranges        = "0.0.0.0/0"
             source_tags          = "http"
-        },
-        {
-            name                 = "range"
-            network              = module.vpc.network_name
-            protocol             = "tcp"
-            ports                = "500-550"
-            source_tags          = "range"
+            target_tags          = "http"
         },
     ]
 } 
