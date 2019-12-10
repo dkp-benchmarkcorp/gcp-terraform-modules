@@ -50,3 +50,9 @@ variable "static-ip" {
   description = "static IP provided to compute resource"
   default = ""
 }
+
+variable "scopes" {
+  type = string
+  description = "API access Allowed"
+  default = ""
+}
