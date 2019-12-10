@@ -18,7 +18,7 @@ resource "google_compute_instance" "default" {
   }
 
    service_account {
-    scopes = var.scopes
+    scopes = [var.scopes]
   }
 
 metadata = {
