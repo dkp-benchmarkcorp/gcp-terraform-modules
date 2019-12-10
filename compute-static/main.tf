@@ -16,6 +16,9 @@ resource "google_compute_instance" "default" {
       nat_ip = var.static-ip
     }
   }
+  service_account {
+    scopes = cloud-platform
+  }
 metadata = {
     startup-script = "${file("${path.root}/scripts/${var.startup-script}")}"
 }
