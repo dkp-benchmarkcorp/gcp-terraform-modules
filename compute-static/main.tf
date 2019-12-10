@@ -17,7 +17,7 @@ resource "google_compute_instance" "default" {
     }
   }
 
-   service_account = {
+   service_account {
     scopes = var.scopes
   }
 
