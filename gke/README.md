@@ -1,6 +1,6 @@
 ```hcl
 module "gke" {
-    source = "git::https://oauth2:6FxwbXDCCb1WNsfgxjJW@gitlab.com/kwdevops/gcp-terraform-modules//gke?ref=add-compute"
+    source = "git::https://oauth2:6FxwbXDCCb1WNsfgxjJW@gitlab.com/kwdevops/gcp-terraform-modules//gke"
     cluster = [
 {
   name                       = "gke-test-1"
@@ -19,6 +19,7 @@ module "gke" {
   enable_private_nodes       = true
   master_ipv4_cidr_block     = "10.0.0.0/28"
   remove_default_node_pool   = true
+  default_max_pods_per_node = 8
   initial_node_count         = 1
     cidr_block   = "10.0.0.0/24"
       display_name = "main-network"
