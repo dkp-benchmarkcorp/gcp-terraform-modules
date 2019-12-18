@@ -17,7 +17,7 @@ module "gke" {
   network_policy_config      = true
   enable_private_endpoint    = true
   enable_private_nodes       = true
-  master_ipv4_cidr_block     = "10.0.0.0/28"
+  master_ipv4_cidr_block     = "172.16.0.0/28"
   remove_default_node_pool   = true
   default_max_pods_per_node = 8
   initial_node_count         = 1
