@@ -1,4 +1,5 @@
 resource "google_container_cluster" "primary" {
+  provider          = google-beta
   count             = length(var.cluster)
   name              = lookup(var.cluster[count.index], "name", "")
   description       = lookup(var.cluster[count.index], "description", "")
@@ -35,6 +36,7 @@ resource "google_container_cluster" "primary" {
     http_load_balancing {
       disabled = lookup(var.cluster[count.index], "http_load_balancing", "")
     }
+    
     istio_config {
       disabled = lookup(var.cluster[count.index], "istio", "")
     }
