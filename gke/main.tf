@@ -35,7 +35,10 @@ resource "google_container_cluster" "primary" {
     http_load_balancing {
       disabled = lookup(var.cluster[count.index], "http_load_balancing", "")
     }
-
+    istio {
+      disabled = lookup(var.cluster[count.index], "istio", "")
+    }
+    
     horizontal_pod_autoscaling {
       disabled = lookup(var.cluster[count.index], "horizontal_pod_autoscaling", "")
     }
