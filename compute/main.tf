@@ -1,4 +1,5 @@
 resource "google_compute_instance" "default" {
+  allow_stopping_for_update = true
   count        = var.amount
   name         = "${var.name_prefix}-${count.index+1}"
   machine_type = var.machine_type
