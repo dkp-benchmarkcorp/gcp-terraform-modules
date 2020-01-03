@@ -1,9 +1,11 @@
 resource "google_compute_router" "router"{
-    name    = var.router_name
-    network = var.network_name
+    provider = google-beta
+    name     = var.router_name
+    network  = var.network_name
 }
 
 resource "google_compute_router_nat" "nat" {
+    provider                           = google-beta
     name                               = var.nat_name
     router                             = google_compute_router.router.name
     nat_ip_allocate_option             = "AUTO_ONLY"
