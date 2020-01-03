@@ -19,7 +19,7 @@ module "compute" {
     source = "git::https://gitlab.com/kwdevops/gcp-terraform-modules//compute"
      
     amount         = 2
-    name           = web
+    name_prefix    = web
     machine_type   = n1-standard-1
     zone           = us-east1-b
     image          = ubuntu-1904-disco-v20191019
