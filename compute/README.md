@@ -15,15 +15,16 @@ intended for Terraform 0.11.x is [3.0.0].
 ## Usage
 
 ```hcl
-module "compute" {
-    source = "git::https://gitlab.com/kwdevops/gcp-terraform-modules//compute"
-     
-    amount         = 2
-    name           = web
-    machine_type   = n1-standard-1
-    zone           = us-east1-b
-    image          = ubuntu-1904-disco-v20191019
-    network        = default
-    startup-script = harness-delegate
-}   
+mmodule "compute" {
+    source = "git::https://oauth2:6FxwbXDCCb1WNsfgxjJW@gitlab.com/kwdevops/gcp-terraform-modules//compute"
+    amount = 1
+    name_prefix  = "compute"
+    tags = "ssh"
+    machine_type = "n1-standard-1"
+    zone         = "us-east1-b"
+    image        = "ubuntu-1904-disco-v20191020"
+    subnetwork   = "subnet-01"
+    startup-script = "bootstrap.txt"
+}
+
 ```
