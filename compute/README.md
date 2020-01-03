@@ -23,7 +23,7 @@ module "compute" {
     machine_type   = n1-standard-1
     zone           = us-east1-b
     image          = ubuntu-1904-disco-v20191019
-    network        = default
+    subnetwork     = default
     startup-script = harness-delegate
 }   
 ```
