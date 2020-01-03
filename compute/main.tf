@@ -1,10 +1,12 @@
 resource "google_compute_instance" "default" {
+  provider                  = google-beta
   allow_stopping_for_update = true
-  count        = var.amount
-  name         = "${var.name_prefix}-${count.index+1}"
-  machine_type = var.machine_type
-  zone         = var.zone
-  tags         = [var.tags]
+  // this above line may not be required
+  count                     = var.amount
+  name                      = "${var.name_prefix}-${count.index+1}"
+  machine_type              = var.machine_type
+  zone                      = var.zone
+  tags                      = [var.tags]
   boot_disk {
     initialize_params {
       image = var.image
