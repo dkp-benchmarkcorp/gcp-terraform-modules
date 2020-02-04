@@ -19,7 +19,7 @@ intended for Terraform 0.11.x is [3.0.0].
 
 ```hcl
 module "vpc" {
-    source = "git::https://gitlab.com/kwdevops/gcp-terraform-modules//vpc"
+    source = "git::https://github.com/benchmarkconsulting/gcp-terraform-modules//vpc"
     
     project_id   = "project01"
     shared_vpc_host = "false"
