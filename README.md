@@ -27,5 +27,5 @@ intended for Terraform 0.11.x is [3.0.0].
 
 ```hcl
 module "<module>" {
-    source = "git::https://gitlab.com/kwdevops/gcp-terraform-modules//<module>"
+    source = "git::https://github.com/benchmarkconsulting/gcp-terraform-modules//<module>"
 ```
