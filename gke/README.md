@@ -1,6 +1,6 @@
 ```hcl
 module "gke" {
-    source = "git::https://oauth2:6FxwbXDCCb1WNsfgxjJW@gitlab.com/kwdevops/gcp-terraform-modules//gke"
+    source = "git::https://github.com/benchmarkconsulting/gcp-terraform-modules//gke"
     cluster = [
 {
   name                       = "gke-test-1"
