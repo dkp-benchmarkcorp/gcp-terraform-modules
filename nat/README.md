@@ -16,7 +16,7 @@ intended for Terraform 0.11.x is [3.0.0].
 
 ```hcl
 module "nat" {
-    source = "git::https://gitlab.com/kwdevops/gcp-terraform-modules//nat"
+    source = "git::https://github.com/benchmarkconsulting/gcp-terraform-modules//nat"
     router_name = "router-01"
     nat_name = "nat-01"
     network_name = module.vpc.network_name
