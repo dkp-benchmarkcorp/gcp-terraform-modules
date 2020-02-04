@@ -16,7 +16,7 @@ intended for Terraform 0.11.x is [3.0.0].
 
 ```hcl
 mmodule "compute" {
-    source = "git::https://oauth2:6FxwbXDCCb1WNsfgxjJW@gitlab.com/kwdevops/gcp-terraform-modules//compute"
+    source = "git::https://github.com/benchmarkconsulting/gcp-terraform-modules//compute"
     amount = 1
     name_prefix  = "compute"
     tags = "ssh"
