@@ -19,17 +19,17 @@ output "subnet_name"{
 }
 
 output "priv_cluster_cidr"{
-    value = google_container_cluster.primary.*.master_ipv4_cidr_block
+    value = google_container_cluster.primary[*].private_cluster_config.master_ipv4_cidr_block
     description = "The IP range to use for the master network"
 }
 
 output "cluster_secondary_ranges"{
-    value = google_container_cluster.primary.*.cluster_secondary_range_name
+    value = google_container_cluster.primary[*].ip_allocation_policy.cluster_secondary_range_name
     description = "The secondary ranges in the cluster's subnet for IP addresses"
 }
 
 output "serv_secondary_ranges"{
-    value = google_container_cluster.primary.*.services_secondary_range_name
+    value = google_container_cluster.primary[*].ip_allocation_policy.services_secondary_range_name
     description = "The secondary ranges in the cluster's subnet for service use"
 }
 
