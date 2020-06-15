@@ -1,6 +1,7 @@
 resource "google_container_cluster" "primary" {
   count             = length(var.cluster)
   name              = lookup(var.cluster[count.index], "name", "")
+  project           = lookup(var.cluster[count.index], "project", "")
   description       = lookup(var.cluster[count.index], "description", "")
   location          = lookup(var.cluster[count.index], "location", "")
   network           = lookup(var.cluster[count.index], "network", "")
