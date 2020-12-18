@@ -25,5 +25,6 @@ module "compute" {
     image          = ubuntu-1904-disco-v20191019
     network        = default
     startup-script = harness-delegate
+    static-ip      = 10.10.10.239
 }   
 ```
