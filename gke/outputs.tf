@@ -1,4 +1,3 @@
-
 output "cluster_names"{
     value = google_container_cluster.primary.name
     description = "The name of the gke cluster"
