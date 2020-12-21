@@ -1,3 +1,5 @@
+provider "google" {
+}
 resource "google_container_cluster" "primary" {
   count             = length(var.cluster)
   name              = lookup(var.cluster[count.index], "name", "")
