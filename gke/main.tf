@@ -56,7 +56,7 @@ resource "google_container_cluster" "primary" {
 
 resource "google_container_node_pool" "primary_preemptible_nodes" {
   count    = length(var.node_pools)
-  project   =  lookup(var.cluster[count.index], "project", "")
+  project    = lookup(var.node_pools[count.index], "project", "")
   name       = var.node_pools[count.index]["name"]
   location   = lookup(var.node_pools[count.index], "location", "")
   cluster    = google_container_cluster.primary[count.index].name
