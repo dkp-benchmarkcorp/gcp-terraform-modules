@@ -8,13 +8,13 @@ resource "google_container_cluster" "primary" {
   network                  = lookup(var.cluster[count.index], "network", "")
   subnetwork               = lookup(var.cluster[count.index], "subnetwork", "")
   remove_default_node_pool = lookup(var.cluster[count.index], "remove_default_node_pool", "")
-  #A node pool should always be created with this modul no need to create any more defualt nodes then necessary.
+  #A Node pool is always created with a new cluster so set it to one, we will remove it.
   initial_node_count        = 1
   default_max_pods_per_node = lookup(var.cluster[count.index], "default_max_pods_per_node", "")
 
   network_policy {
     enabled  = lookup(var.cluster[count.index], "network_policy", "")
-    provider = lookup(var.cluster[count.index], "network_policy_provider", "")
+    provider = false ? lookup(var.cluster[count.index], "network_policy", "") : "PROVIDER_UNSPECIFIED" 
   }
 
   master_authorized_networks_config {
@@ -57,9 +57,9 @@ resource "google_container_cluster" "primary" {
 
 resource "google_container_node_pool" "primary_preemptible_nodes" {
   count      = length(var.node_pools)
-  name       = var.node_pools[count.index]["name"]
+  name       = true ? lookup(var.node_pools[count.index], "name", "") : "${lookup(var.node_pools[count.index], "cluster_name", "")}-node-pool"
   location   = lookup(var.node_pools[count.index], "location", "")
-  cluster    = google_container_cluster.primary[0].name
+  cluster    = lookup(var.node_pools[count.index], "cluster_name")
   node_count = lookup(var.node_pools[count.index], "node_count", "")
 
   autoscaling {
@@ -71,7 +71,7 @@ resource "google_container_node_pool" "primary_preemptible_nodes" {
   }
 
   node_config {
-    preemptible  = true
+    preemptible  = lookup(var.node_pools[count.index], "preemptible", "")
     machine_type = lookup(var.node_pools[count.index], "machine_type", "")
     image_type   = lookup(var.node_pools[count.index], "image_type", "")
 
