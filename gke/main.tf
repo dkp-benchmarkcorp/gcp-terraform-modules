@@ -14,7 +14,8 @@ resource "google_container_cluster" "primary" {
 
   network_policy {
     enabled  = lookup(var.cluster[count.index], "network_policy", "")
-    provider = false ? lookup(var.cluster[count.index], "network_policy", "") : "PROVIDER_UNSPECIFIED" 
+    #if the network policy equals true there has to be a provider we set that to CALICO
+    provider =  lookup(var.cluster[count.index], "network_policy", "") == "true" ? "CALICO" :  "PROVIDER_UNSPECIFIED"
   }
 
   master_authorized_networks_config {
@@ -47,6 +48,9 @@ resource "google_container_cluster" "primary" {
     horizontal_pod_autoscaling {
       disabled = lookup(var.cluster[count.index], "horizontal_pod_autoscaling", "")
     }
+      network_policy_config {
+      disabled = lookup(var.cluster[count.index], "network_policy", "") == true ? true : false
+    }
   }
 
   ip_allocation_policy {
@@ -55,9 +59,10 @@ resource "google_container_cluster" "primary" {
   }
 }
 
-resource "google_container_node_pool" "primary_preemptible_nodes" {
+resource "google_container_node_pool" "pools" {
+
   count      = length(var.node_pools)
-  name       = true ? lookup(var.node_pools[count.index], "name", "") : "${lookup(var.node_pools[count.index], "cluster_name", "")}-node-pool"
+  name       = lookup(var.node_pools[count.index], "name", "") == "" ? "${lookup(var.node_pools[count.index], "cluster_name", "")}-node-pool" : lookup(var.node_pools[count.index], "name", "")
   location   = lookup(var.node_pools[count.index], "location", "")
   cluster    = lookup(var.node_pools[count.index], "cluster_name")
   node_count = lookup(var.node_pools[count.index], "node_count", "")
